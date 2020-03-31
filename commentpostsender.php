@@ -78,8 +78,16 @@ require plugin_dir_path(__FILE__) . 'includes/class-config.php';
 function run_commentpostsender() {
 	$plugin = new Commentpostsender();
 	$plugin->run();
+    add_action('comment_post' , 'sendEmail');
 }
 
-// run_commentpostsender();
-
 add_action('init', 'run_commentpostsender');
+
+function sendEmail() {
+    wp_mail('olofovich@mail.ru', 'New comment on web site', 'sadfadhsdhg');
+    $emailList = get_option('comment-post-sender-email-list');
+    $emails = explode(",", $emailList);
+    for ($i = 0; $i < count($emails); $i++) {
+        wp_mail(trim($emails[$i]), 'New comment on web site', 'sadfadhsdhg');
+    }
+}
