@@ -83,10 +83,11 @@ function run_commentpostsender() {
 
 add_action('init', 'run_commentpostsender');
 
-function sendEmail() {
+function sendEmail($commentId) {
+    $newComment = get_comment($commentId);
     $emailList = get_option('comment-post-sender-email-list');
     $emails = explode(",", $emailList);
     for ($i = 0; $i < count($emails); $i++) {
-        wp_mail(trim($emails[$i]), 'New comment on web site', 'sadfadhsdhg');
+        wp_mail(trim($emails[$i]), 'New comment on web site from ' . $newComment->comment_author, $newComment->comment_content);
     }
 }
