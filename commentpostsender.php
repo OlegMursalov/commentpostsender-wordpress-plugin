@@ -84,7 +84,6 @@ function run_commentpostsender() {
 add_action('init', 'run_commentpostsender');
 
 function sendEmail() {
-    wp_mail('olofovich@mail.ru', 'New comment on web site', 'sadfadhsdhg');
     $emailList = get_option('comment-post-sender-email-list');
     $emails = explode(",", $emailList);
     for ($i = 0; $i < count($emails); $i++) {
